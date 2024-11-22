@@ -144,5 +144,4 @@ class EmployeeController extends Base
         // Load trang thêm hoặc sửa nhân viên
         $this->output->load("employee/createOrUpdateEmployee", $data);
     }
-
 }

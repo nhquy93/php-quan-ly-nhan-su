@@ -6,6 +6,8 @@
  */
 
 return [
-    "/" => "employee/employee/index",
+    "/" => "user/user/login",
+    "/trang-chu" => "employee/employee/index",
     "/cap-nhat-thong-tin" => "employee/employee/createOrUpdateEmployee",
+    "/logout" => "user/user/logout",
 ];

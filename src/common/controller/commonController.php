@@ -10,7 +10,6 @@ use Engine\Base;
  */
 class CommonController extends Base
 {
-
     /**
      * Returns the 404 error page
      */
