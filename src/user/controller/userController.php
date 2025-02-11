@@ -54,6 +54,25 @@ class UserController extends Base
 
                 header('Location: /');
                 exit;
+            } else if (isset($_POST['newPassword'])) {
+                // Xử lý đặt lại mật khẩu
+                try {
+                    $username = $_POST['username'];
+                    $password = $_POST['newPassword'];
+                    $user = $user_model->resetPassword($username, $password);
+                    if ($user) {
+                        $_SESSION['message'] = "Đặt lại mật khẩu thành công.";
+                    } else {
+                        $_SESSION['error'] = "Tài khoản không tồn tại trong hệ thống.";
+                    }
+                } catch (\Exception $e) {
+                    // Có lỗi không mong muốn xảy ra
+                    $this->console->addDebugInfo("Error during reset password: " . $e->getMessage());
+                    $_SESSION['error'] = "Có lỗi không mong muốn xảy ra, vui lòng thử lại sau!";
+                }
+
+                header('Location: /');
+                exit;
             }
         } else {
             // Load login view

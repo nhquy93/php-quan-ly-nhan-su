@@ -61,4 +61,29 @@ class UserModel extends Base
             return $this->database->query($query, $params);
         }
     }
+
+    /**
+     * Đặt lại mật khẩu cho tài khoản người dùng
+     *
+     * @param string $username
+     * @param string $password
+     *
+     * @return bool
+     */
+    public function resetPassword($username, $password)
+    {
+        // Kiểm tra xem tên người dùng đã tồn tại chưa?
+        $existUser = $this->isUsernameTaken($username);
+        if ($existUser) {
+            //Băm mật khẩu để bảo mật
+            $hashedPassword = md5($password);
+
+            $query = "UPDATE users SET password = :password WHERE username = :username";
+            $params = array("username" => $username, "password" => $hashedPassword);
+
+            return $this->database->query($query, $params);
+        } else {
+            return false; // Tên tài khoản không tồn tại
+        }
+    }
 }

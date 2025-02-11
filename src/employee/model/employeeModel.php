@@ -13,7 +13,7 @@ class EmployeeModel extends Base
      * @param int $offset Số Offset để bắt đầu lấy thông tin nhân viên.
      * @return array
      */
-    public function getAllEmployees($limit, $offset): array
+    public function getAllEmployees($limit, $offset): mixed
     {
         $query = "SELECT * FROM `employees` LIMIT :limit OFFSET :offset";
         return $this->database->query($query, ['limit' => $limit, 'offset' => $offset]);

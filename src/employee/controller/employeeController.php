@@ -19,8 +19,6 @@ class EmployeeController extends Base
         $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
         $offset = ($page - 1) * $limit;
 
-        $data["employees"] = $employee_model->getAllEmployees($limit, $offset);
-
         // Tìm tổng số nhân viên
         $totalEmployees = $employee_model->countAllEmployees();
         // Tính số trang
@@ -47,8 +45,8 @@ class EmployeeController extends Base
 
         // Nếu phương thức hiện tại là GET => thực hiện lọc dữ liệu nhân viên
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            $keyword = $_GET['keyword'];
-            if ($keyword) {
+            $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+            if (!empty($keyword)) {
                 $result = $employee_model->filterEmployee($keyword);
                 /**
                  * Dòng mã phía dưới đang gán giá trị cho mảng $data["employees"].
@@ -60,7 +58,9 @@ class EmployeeController extends Base
                 $data["employees"] = empty($result) ? array() : (isset($result[0]) ? $result : array($result));
             } else {
                 // Nếu $keyword rỗng, trả lại danh sách nhân viên
-                $data["employees"] = $employee_model->getAllEmployees($limit, $offset);
+                $employees = $employee_model->getAllEmployees($limit, $offset);
+                // Tương tự như với $result, dòng này gán $employees cho $data["employees"]
+                $data["employees"] = empty($employees) ? array() : (isset($employees[0]) ? $employees : array($employees));
             }
         }
 

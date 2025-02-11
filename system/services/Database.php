@@ -39,6 +39,10 @@ class Database
         $smtp->setFetchMode(\PDO::FETCH_ASSOC);
         $query = $smtp->execute($params);
 
+        if (strpos($sql_query, "UPDATE") !== false) {
+            return $query; // Trả về kết quả thực thi truy vấn UPDATE (true hoặc false)
+        }
+
         $data = array();
 
         if ($query) {
