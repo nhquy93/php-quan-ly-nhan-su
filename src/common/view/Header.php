@@ -2,16 +2,14 @@
 <html>
 
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta author="David Baqueiro">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Light PHP</title>
+    <title>PHP - Quản Lý Nhân Sự</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="/www/dist/src.css?v=<?= $this->cache_version; ?>" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -39,8 +37,8 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <?php if (isset($_SESSION['logged']) && $_SESSION['logged']): ?>
                     <li><a class="black-text" href="/logout">Đăng xuất</a></li>
+                    <li><a class="black-text" href="index.php?route=employee/employee/chartPage">Thống kê (Chức vụ)</a></li>
                 <?php endif; ?>
-                <li><a class="black-text" href="index.php?route=product/product/samplePage">Sample</a></li>
                 <li><a class="black-text" href="index.php?route=product/product/sample">Not found page</a></li>
             </ul>
         </div>

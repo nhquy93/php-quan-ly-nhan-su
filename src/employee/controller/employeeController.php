@@ -144,4 +144,40 @@ class EmployeeController extends Base
         // Load trang thêm hoặc sửa nhân viên
         $this->output->load("employee/createOrUpdateEmployee", $data);
     }
+
+    /**
+     * Hiển thị trang thống kê các chức vụ
+     */
+    public function chartPage(): void
+    {
+        $labels = array();
+        $sizes = array();
+
+        $employee_model = new EmployeeModel();
+        $result = $employee_model->getPositionForChart();
+        foreach ($result as $row) {
+            $labels[] = $row['position'];
+            $sizes[] = $row['total'];
+        }
+
+        // Dữ liệu cho biểu đồ
+        $data = [
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'data' => $sizes,
+                    // Mẫu màu cho từng phần tử biểu đồ, có thể thay bằng mẫu màu khác
+                    'backgroundColor' => [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0',
+                        '#9966FF',
+                        '#FF9F40'
+                    ],
+                ]
+            ]
+        ];
+        $this->output->load("employee/chart", $data);
+    }
 }

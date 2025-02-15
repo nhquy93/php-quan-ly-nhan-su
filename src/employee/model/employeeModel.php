@@ -110,4 +110,15 @@ class EmployeeModel extends Base
     {
         return $this->database->query("SELECT COUNT(*) as total FROM `employees`")['total'];
     }
+
+    /**
+     * Trả về số lượng nhân viên theo từng chức vụ để vẽ biểu đồ.
+     *
+     * @return array Mảng chứa tên chức vụ và tổng số nhân viên tương ứng
+     */
+
+    public function getPositionForChart()
+    {
+        return $this->database->query("SELECT position, COUNT(*) as total FROM `employees` GROUP BY position");
+    }
 }
