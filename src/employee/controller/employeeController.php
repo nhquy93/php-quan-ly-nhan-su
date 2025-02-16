@@ -133,7 +133,7 @@ class EmployeeController extends Base
             }
 
             // Redirect về lại trang chủ
-            header("Location: /");
+            header("Location: /trang-chu");
         } else {
             // Lấy dữ liệu nhân viên nếu có $id
             if ($_GET['id']) {
